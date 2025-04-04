@@ -24,8 +24,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
                 )
         ),
         externalDocs = @ExternalDocumentation(
-                description = "EazyBank Loans microservice REST API Documentation",
-                url = "https://www.eazybytes.com/swagger-ui.html"
+                description = "EzBank Loans microservice REST API Documentation"
         )
 )
 public class LoansApplication {
