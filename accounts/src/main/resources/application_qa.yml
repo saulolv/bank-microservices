@@ -1,0 +1,16 @@
+spring:
+  config:
+    activate:
+      on-profile: "qa"
+
+build:
+  version: "1.2.0"
+
+accounts:
+  message: "Welcome to Accounts Microservice related QA environment"
+  description: "This microservice is responsible for managing user accounts."
+  contact:
+    name: "Saulo"
+    email: "example@gmail.com"
+
+

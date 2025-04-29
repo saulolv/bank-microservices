@@ -1,0 +1,18 @@
+spring:
+  config:
+    activate:
+      on-profile: "prod"
+
+build:
+  version: "1.1.0"
+
+loans:
+  message: "Welcome to Loans Microservice related production environment"
+  description: "This microservice is responsible for managing user loans."
+  contact:
+    name: "Saulo Santos"
+    email: "saulosantos@gmail.com"
+  onCallSupport:
+    - (+55) 21 99999-9999
+    - (+55) 21 88888-8888
+    - (+55) 21 77777-7777

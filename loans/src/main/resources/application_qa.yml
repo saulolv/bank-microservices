@@ -1,0 +1,16 @@
+spring:
+  config:
+    activate:
+      on-profile: "qa"
+
+build:
+  version: "1.2.0"
+
+loans:
+  message: "Welcome to Loans Microservice related QA environment"
+  description: "This microservice is responsible for managing user loans."
+  contact:
+    name: "Saulo Santos"
+    email: "example@gmail.com"
+  onCallSupport:
+    - (+55) 11 99999-9999
