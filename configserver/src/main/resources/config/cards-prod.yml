@@ -1,14 +1,13 @@
-spring:
-  config:
-    activate:
-      on-profile: "qa"
+build:
+  version: "1.1.0"
 
 cards:
-  message: "Welcome to Cards Microservice related Quality Assurance environment"
+  message: "Welcome to Cards Microservice related production environment"
   description: "This microservice is responsible for managing user cards."
   contact:
     name: "Saulo Santos"
-    email: "santos@santos.com"
+    email: "santos@example.com"
   onCallSupport:
     - (+55) 11 99999-9999
     - (+55) 11 88888-8888
+

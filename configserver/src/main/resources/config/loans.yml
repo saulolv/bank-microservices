@@ -1,0 +1,13 @@
+
+server:
+  port: 8090
+
+build:
+  version: "1.3.0"
+
+loans:
+  message: "Welcome to Loans Microservice"
+  description: "This microservice is responsible for managing user loans."
+  contact:
+    name: "Saulo Santos"
+    email: "example@example.com"
