@@ -13,6 +13,6 @@ import java.util.Map;
 @Setter
 public class CardsContactInfoDto {
     private String message;
-    private Map<String, List<String>> contactInfo;
+    private Map<String, List<String>> contact;
     private List<String> onCallSupport;
 }
