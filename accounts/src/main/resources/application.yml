@@ -3,27 +3,25 @@ spring:
       name: accounts
   profiles:
       active: qa
+  # MYSQL
   datasource:
-    url: jdbc:h2:mem:accountdb
-    driver-class-name: org.h2.Driver
-    username: sa
-    password: password
+    url: jdbc:mysql://localhost:3306/accountsdb
+    username: root
+    password: root
+  sql:
+    init:
+      mode: always
   jpa:
     hibernate:
       ddl-auto: update
-    database-platform: org.hibernate.dialect.H2Dialect
     show-sql: true
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
   config:
     import: "optional:configserver:http://localhost:8071/"
-  rabbitmq:
-    host: "localhost"
-    port: 5672
-    username: "guest"
-    password: "guest"
+#  rabbitmq:
+#    host: "localhost"
+#    port: 5672
+#    username: "guest"
+#    password: "guest"
 
 management:
   endpoints:

@@ -14,11 +14,11 @@ spring:
           clone-on-start: true
           force-pull: true
         #native:
-  rabbitmq:
-    host: "rabbitmq"
-    port: 5672
-    username: "guest"
-    password: "guest"      #search-locations: classpath:/config/
+#  rabbitmq:
+#    host: "rabbitmq"
+#    port: 5672
+#    username: "guest"
+#    password: "guest"      #search-locations: classpath:/config/
 
 management:
   endpoints:
