@@ -1,22 +1,6 @@
 services:
-  rabbitmq:
-    image: rabbitmq:4-management
-    hostname: rabbitmq
-    ports:
-      - "5672:5672"
-      - "15672:15672"
-    healthcheck:
-      test: rabbitmq-diagnostics check_port_connectivity
-      interval: 10s
-      timeout: 5s
-      retries: 10
-      start_period: 5s
-    extends:
-      file: common-config.yml
-      service: network-deploy-service
-
   configserver:
-    image: "saulolv/configserver:v1.2"
+    image: "saulolv/configserver:v1.3"
     container_name: "configserver-ms"
     healthcheck:
       test: "curl --fail --silent localhost:8071/actuator/health/readiness | grep UP || exit 1"
@@ -26,48 +10,106 @@ services:
       start_period: 10s
     ports:
       - "8071:8071"
-    depends_on:
-      rabbitmq:
-        condition: service_healthy
+#    depends_on:
+#      rabbitmq:
+#        condition: service_healthy
     extends:
       service: microservice-base-config
       file: common-config.yml
 
   accounts:
-    image: "saulolv/accounts:v1.2"
+    image: "saulolv/accounts:v1.3"
     container_name: "accounts-ms"
     ports:
       - "8080:8080"
+    environment:
+      SPRING_APPLICATION_NAME: accounts
+      SPRING_DATASOURCE_URL: "jdbc:mysql://accountsdb:3306/accountsdb"
     depends_on:
+      accountsdb:
+        condition: service_healthy
       configserver:
         condition: service_healthy
     extends:
       service: microservice-configserver-config
+      file: common-config.yml
+  accountsdb:
+    container_name: accountsdb
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: accountsdb
+    extends:
+      service: microservice-db-config
       file: common-config.yml
 
   loans:
-    image: "saulolv/loans:v1.2"
+    image: "saulolv/loans:v1.3"
     container_name: "loans-ms"
     ports:
       - "8090:8090"
+    environment:
+      SPRING_APPLICATION_NAME: loans
+      SPRING_DATASOURCE_URL: "jdbc:mysql://loansdb:3306/loansdb"
     depends_on:
+      loansdb:
+          condition: service_healthy
       configserver:
         condition: service_healthy
     extends:
       service: microservice-configserver-config
+      file: common-config.yml
+  loansdb:
+    container_name: loansdb
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_DATABASE: loansdb
+    extends:
+      service: microservice-db-config
       file: common-config.yml
 
   cards:
-    image: "saulolv/cards:v1.2"
+    image: "saulolv/cards:v1.3"
     container_name: "cards-ms"
     ports:
       - "9010:9000"
+    environment:
+      SPRING_APPLICATION_NAME: cards
+      SPRING_DATASOURCE_URL: "jdbc:mysql://cardsdb:3306/cardsdb"
     depends_on:
+      cardsdb:
+          condition: service_healthy
       configserver:
         condition: service_healthy
     extends:
       service: microservice-configserver-config
       file: common-config.yml
+  cardsdb:
+    container_name: cardsdb
+    ports:
+      - "3308:3306"
+    environment:
+      MYSQL_DATABASE: cardsdb
+    extends:
+      service: microservice-db-config
+      file: common-config.yml
+
+#  rabbitmq:
+#    image: rabbitmq:4-management
+#    hostname: rabbitmq
+#    ports:
+#      - "5672:5672"
+#      - "15672:15672"
+#    healthcheck:
+#      test: rabbitmq-diagnostics check_port_connectivity
+#      interval: 10s
+#      timeout: 5s
+#      retries: 10
+#      start_period: 5s
+#    extends:
+#      file: common-config.yml
+#      service: network-deploy-service
 
 networks:
   app-network:

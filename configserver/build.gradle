@@ -40,7 +40,7 @@ dependencyManagement {
 
 jib {
     to {
-        image = "saulolv/${project.name}:v1.2"
+        image = "saulolv/${project.name}:v1.3"
     }
 }
 
